@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanTab - Smart Tab Cleaner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <img src="icons/icon128.png" alt="CleanTab Icon">
+        </div>
+        <div class="logo-text">
+          <h1>CleanTab</h1>
+          <span class="version">v1.0</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="status-indicator">
+          <span class="status-pulse" id="statusPulse"></span>
+          <span class="status-label" id="statusLabel">Active</span>
+        </div>
+        <label class="switch" title="Toggle Auto-Close">
+          <input type="checkbox" id="toggleAutoClose" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-monitor">Monitor</button>
+      <button class="tab-btn" data-tab="tab-history">History</button>
+      <button class="tab-btn" data-tab="tab-settings">Settings</button>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="app-content">
+
+      <!-- Monitor View -->
+      <div id="tab-monitor" class="tab-view active">
+        <!-- Stats Container -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrapper closed-color">
+              <img src="icons/closed_tabs.png" alt="Closed Tabs">
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statsClosed">0</span>
+              <span class="stat-title">Tabs Cleaned</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrapper active-color">
+              <img src="icons/active_tabs.png" alt="Active Tabs">
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statsActive">0</span>
+              <span class="stat-title">Active Tabs</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrapper ram-color">
+              <img src="icons/cleaned_ram.png" alt="RAM Released">
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statsRam">0 MB</span>
+              <span class="stat-title">RAM Released</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Inactivity Limit Selector -->
+        <section class="control-card">
+          <div class="card-header" style="margin-bottom: 4px;">
+            <span class="card-title">Inactivity Limit</span>
+            <span class="duration-display" id="durationDisplay">30 Min</span>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <input type="range" min="15" max="180" step="15" value="30" class="range-slider" id="limitSlider">
+              <div class="slider-tooltip" id="sliderTooltip">30m</div>
+            </div>
+            <div class="slider-labels">
+              <span>15m</span>
+              <span>90m</span>
+              <span>180m</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabs Live Manager -->
+        <section class="control-card">
+          <div class="card-header">
+            <span class="card-title">Live Tab Monitor</span>
+            <span class="tab-count-badge" id="tabCount">0 Open</span>
+          </div>
+          <div class="tabs-list-wrapper">
+            <div class="tabs-list" id="tabsList">
+              <div class="loading-state">Loading tabs...</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- History View -->
+      <div id="tab-history" class="tab-view">
+        <section class="control-card history-card">
+          <div class="card-header">
+            <span class="card-title">Cleaning History</span>
+            <button class="btn-clear-history" id="btnClearHistory">Clear All</button>
+          </div>
+          <div class="history-list-wrapper">
+            <div class="history-list" id="historyList">
+              <div class="empty-state">No tabs have been auto-closed yet.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Settings View -->
+      <div id="tab-settings" class="tab-view">
+        <section class="control-card">
+          <div class="card-header">
+            <span class="card-title">Auto-Close Exceptions</span>
+          </div>
+          <div class="settings-content" style="padding-top: 10px;">
+            <!-- Toggle Switches -->
+            <div class="options-group" style="padding-bottom: 6px;">
+              <div class="option-row">
+                <div class="option-label">
+                  <span class="option-name">Ignore Pinned Tabs</span>
+                  <span class="option-desc">Do not close tabs that are pinned</span>
+                </div>
+                <label class="switch-small">
+                  <input type="checkbox" id="ignorePinned" checked>
+                  <span class="slider-small"></span>
+                </label>
+              </div>
+              <div class="option-row">
+                <div class="option-label">
+                  <span class="option-name">Ignore Audio</span>
+                  <span class="option-desc">Keep music/video tabs open</span>
+                </div>
+                <label class="switch-small">
+                  <input type="checkbox" id="ignoreAudio" checked>
+                  <span class="slider-small"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Keep your browser clean and fast automatically.</span>
+    </footer>
+  </div>
+
+  <script src="popup.js" defer></script>
+</body>
+
+</html>
