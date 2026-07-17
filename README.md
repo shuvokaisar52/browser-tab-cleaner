@@ -30,4 +30,4 @@ Browser Tab Cleaner is a lightweight browser extension that automatically closes
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shuvokaisar52/browser-tab-cleaner.git
+   git clone https://github.com/tofayel-hossain/browser-tab-cleaner.git
